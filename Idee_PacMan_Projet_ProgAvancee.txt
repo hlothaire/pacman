@@ -1,12 +1,12 @@
-Fichier Joueur.c
-	Structure Joueur {
+Fichier pacman.c
+	Structure pacman {
 		int PositionX
 		int PositionY
 		int NbVie}
 	Déplacer(): Déplace le joueur suivant la touche enfoncée
 	Collision(): Si Pos Joueur == Pos Pacgome => On gagne des points / Si Pos Joueur == Fantome => On perds une vie/des points / Si Pos Joueur == un mur, on ne bouge pas
 
-Fichier Fantome.c
+Fichier fantome.c
 	Structure Fantome{
 		int PositionX
 		int PositionY
@@ -16,10 +16,10 @@ Fichier Fantome.c
 	//https://fr.wikipedia.org/wiki/Pac-Man
 	switch case ?
 	
-Fichier Niveau.c
+Fichier niveau.c
 	//Boucle qui parcours le fichier ligne par ligne, puis colonne par colonne. Ajoute des Murs (M), des pacgom (G), Joueur (J), Fantome (P), Fruits (F)...
 
-Fantome Score.c
+Fantome score.c
 	//Sauvegarde du meilleur score par niveau (Score = Points + Temps restant ?)
 	//Sauvegarde du meilleur score total (Somme des scores des niveaux précédant)
 	//Classement disponible dans le menu principal
@@ -28,7 +28,7 @@ Fichier Graphique.c
 	Afficher(): Affiche le niveau, le joueur, et les fantomes
 	Update(): Met à jour l'écran ?
 
-Fichier Main.c
+Fichier main.c
 	
 ------------------------
 A) Mode "tour par tour"

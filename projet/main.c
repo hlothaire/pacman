@@ -3,7 +3,8 @@
 #include <string.h>
 #include <SDL2/SDL.h>
 #include <stdbool.h>
-
+#include "pacman.h"
+#define SPRITE_SIZE 32;
 
 int main(int argc, char *argv[])
 {
@@ -26,6 +27,9 @@ int main(int argc, char *argv[])
         return EXIT_FAILURE;
     }
     
+    //creation du joueur
+    pacman_t Joueur = ConsJoueur(0,0,3);
+    
     //boucle principale
     while(!terminer){
         SDL_PollEvent(&evenements);
@@ -37,9 +41,37 @@ int main(int argc, char *argv[])
                 switch(evenements.key.keysym.sym)
                 {
                     case SDLK_ESCAPE:
+                        printf("\n*------------------------------------*\nFermeture du jeu...\nAu revoir !\n*------------------------------------*\n");
                         terminer = true; break;
-                    case SDLK_a:
-                        printf("Touche A enfoncee"); break;
+                    case SDLK_z:
+                        printf("Touche Z enfoncee \n");
+                        if (collision(Joueur, 4) == 1){
+                            Joueur.PosY = Joueur.PosY - SPRITE_SIZE;
+                        }
+                        printf("x = %d / y = %d\n", Joueur.PosX, Joueur.PosY);
+                        break;
+                    case SDLK_s:
+                        printf("Touche S enfoncee \n");
+                        if (collision(Joueur, 2) == 1){
+                            Joueur.PosY = Joueur.PosY + SPRITE_SIZE;
+                        }
+                        //Joueur.PosY = Joueur.PosY + 1;
+                        printf("x = %d / y = %d\n", Joueur.PosX, Joueur.PosY);
+                        break;
+                    case SDLK_q:
+                        printf("Touche Q enfoncee \n");
+                        if (collision(Joueur, 1) == 1){
+                            Joueur.PosX = Joueur.PosX - SPRITE_SIZE;
+                        }
+                        printf("x = %d / y = %d\n", Joueur.PosX, Joueur.PosY);
+                        break;
+                    case SDLK_d:
+                        printf("Touche D enfoncee \n");
+                        if (collision(Joueur, 3) == 1){
+                            Joueur.PosX = Joueur.PosX + SPRITE_SIZE;
+                        }
+                        printf("x = %d / y = %d\n", Joueur.PosX, Joueur.PosY);
+                        break;
                 }
         }
     }

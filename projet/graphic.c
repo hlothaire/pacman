@@ -12,12 +12,6 @@ void clean_texture(SDL_Texture *texture){
       SDL_DestroyTexture(texture);
 }
 
-void clean_textures(textures_t *textures){
-  clean_texture(textures->background);
-  clean_texture(textures->fantome);
-  clean_texture(textures->joueur);
-  clean_texture(textures->font);
-}
 
 void clear_renderer(SDL_Renderer *renderer){
   SDL_RenderClear(renderer);
@@ -32,11 +26,6 @@ void apply_texture(SDL_Texture *texture,SDL_Renderer *renderer,int x, int y){
   SDL_RenderCopy(renderer, texture, NULL, &dst);
 }
 
-void apply_background(SDL_Renderer *renderer, textures_t *textures){
-  if(textures->background != NULL){
-    apply_texture(textures->background, renderer, 0, 0);
-  }
-}
 
 SDL_Texture *load_image(const char path[], SDL_Renderer *renderer){
   SDL_Surface *tmp = NULL;

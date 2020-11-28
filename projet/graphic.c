@@ -7,9 +7,11 @@
 #include "graphic.h"
 
 
-void clean_texture(SDL_Texture *texture){
+void clean_texture(SDL_Texture *texture)
+{
   if(NULL != texture){
       SDL_DestroyTexture(texture);
+    }
 }
 
 

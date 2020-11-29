@@ -48,3 +48,28 @@ char** lire_fichier(const char* nomFichier){
     return tab;
   }
 }
+
+void create_level(char** tab,SDL_Texture* bloc,SDL_Texture *vide,SDL_Texture *gomme,SDL_Renderer *renderer)
+{
+  for(int i = 0;i<16;i++){
+    for(int j = 0;j<16;j++){
+      int x = i*32;
+      int y = j*32;
+      switch(tab[i][j])
+      {
+        case '0':
+            apply_texture(vide,renderer,y,x);
+            break;
+        case '1':
+            apply_texture(gomme,renderer,y,x);
+            break;
+        case '2':
+            apply_texture(bloc,renderer,y,x);
+            break;
+        case '3':
+            apply_texture(gomme,renderer,y,x);
+            break;
+      }
+    }
+  }
+}

@@ -3,10 +3,11 @@
  * \author Lothaire Holcvart Alexandre Serratore
  * \brief bibliotheque gestion niveau
  */
-#include <SDL2/SDL.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include<string.h>
+ #include<SDL2/SDL.h>
+ #include<stdio.h>
+ #include<stdlib.h>
+ #include<string.h>
+ #include"graphic.h"
 
 
 /**
@@ -29,3 +30,13 @@ void desallouer_tab_2D(char** tab, int n);
  * \return tab  tableau 2D
 */
 char** lire_fichier(const char* nomFichier);
+
+/**
+ * \brief fonction qui gere l'affichage du niveau en fonction du tableau
+ * \param tab tableau
+ * \param bloc
+ * \param vide
+ * \param gomme
+ * \param renderer
+*/
+void create_level(char** tab,SDL_Texture* bloc,SDL_Texture *vide,SDL_Texture *gomme,SDL_Renderer *renderer);

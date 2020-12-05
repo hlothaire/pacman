@@ -1,10 +1,10 @@
 C=gcc
 CFLAGS=-Wall
 LIBS = -L./SDL2_ttf/.libs -L./SDL2_image/.libs
-LDFLAGS= `sdl2-config --cflags --libs`
+LDFLAGS= `sdl2-config --cflags --libs` -lm
 INCLUDES= -I./SDL2_ttf -I./SDL2_image
 EXEC=main
-SRC= main.c graphic.c niveau.c pacman.c
+SRC= main.c graphic.c niveau.c jeu.c
 OBJ= $(SRC:.c=.o)
 
 all: $(EXEC)

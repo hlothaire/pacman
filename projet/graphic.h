@@ -7,6 +7,16 @@
 #include <SDL2/SDL.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include "niveau.h"
+
+typedef struct textures_s{
+  SDL_Texture* joueur;
+  SDL_Texture* mur;
+  SDL_Texture* gomme;
+} textures_t;
+
+
+
 
 /**
  * \brief La fonction nettoie une texture en mémoire
@@ -14,6 +24,14 @@
 */
 
 void clean_texture(SDL_Texture *texture);
+
+void clean_textures(textures_t *textures);
+
+void init_textures(SDL_Renderer *renderer, textures_t *textures);
+
+void apply_sprite(SDL_Renderer *renderer, SDL_Texture *texture, sprite_t * sprite);
+
+void apply_player(SDL_Renderer *renderer,SDL_Texture *texture,pacman_t *pacman);
 
 /**
  * \brief La fonction vide le contenu graphique du renderer lié à l'écran de jeu
@@ -70,3 +88,11 @@ void clean_sdl(SDL_Renderer *renderer,SDL_Window *window);
 */
 
 int init_sdl(SDL_Window **window, SDL_Renderer **renderer, int width, int height);
+
+SDL_Texture *load_imageJ(const char path[], SDL_Renderer *renderer);
+
+void apply_mur(SDL_Renderer *renderer, SDL_Texture *textures, world_t* world);
+
+void apply_gomme(SDL_Renderer *renderer, SDL_Texture *textures, world_t* world);
+
+void refresh_graphics(SDL_Renderer *renderer, world_t *world,textures_t *textures);

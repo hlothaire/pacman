@@ -49,25 +49,46 @@ char** lire_fichier(const char* nomFichier){
   }
 }
 
-void create_level(char** tab,SDL_Texture* bloc,SDL_Texture *vide,SDL_Texture *gomme,SDL_Renderer *renderer)
+void nb_element(char** tab,world_t *world)
 {
+  world->nb_gomme = 0;
+  world->nb_mur = 0;
+  for(int i =0;i<16;i++){
+    for(int j= 0;j<16;j++){
+      if(tab[i][j] == '1'){
+        world->nb_gomme ++;
+      }
+      if(tab[i][j] == '2'){
+        world->nb_mur ++;
+      }
+      if(tab[i][j] == '3'){
+        world->nb_gomme ++;
+      }
+    }
+  }
+}
+
+void create_level(char** tab,world_t *world)
+{
+  int gomme = 0;
+  int mur = 0;
   for(int i = 0;i<16;i++){
     for(int j = 0;j<16;j++){
       int x = i*32;
       int y = j*32;
       switch(tab[i][j])
       {
-        case '0':
-            apply_texture(vide,renderer,y,x);
-            break;
         case '1':
-            apply_texture(gomme,renderer,y,x);
+            init_gomme(world,x,y,gomme);
+            gomme ++;
             break;
         case '2':
-            apply_texture(bloc,renderer,y,x);
+            init_mur(world,x,y,mur);
+            mur ++;
             break;
         case '3':
-            apply_texture(gomme,renderer,y,x);
+            init_gomme(world,x,y,gomme);
+            gomme ++;
             break;
       }
     }

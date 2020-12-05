@@ -3,12 +3,11 @@
  * \author Lothaire Holcvart Alexandre Serratore
  * \brief bibliotheque gestion niveau
  */
- #include<SDL2/SDL.h>
- #include<stdio.h>
- #include<stdlib.h>
- #include<string.h>
- #include"graphic.h"
-
+#include<SDL2/SDL.h>
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+#include"jeu.h"
 
 /**
  * \brief allocation memoire d'un tableau 2D
@@ -16,6 +15,7 @@
  * \param m nombre de collone
 */
 char** allouer_tab_2D(int n, int m);
+
 
 /**
  * \brief fonction qui libere un tableau 2D
@@ -31,6 +31,8 @@ void desallouer_tab_2D(char** tab, int n);
 */
 char** lire_fichier(const char* nomFichier);
 
+void nb_element(char** tab,world_t *world);
+
 /**
  * \brief fonction qui gere l'affichage du niveau en fonction du tableau
  * \param tab tableau
@@ -39,4 +41,4 @@ char** lire_fichier(const char* nomFichier);
  * \param gomme
  * \param renderer
 */
-void create_level(char** tab,SDL_Texture* bloc,SDL_Texture *vide,SDL_Texture *gomme,SDL_Renderer *renderer);
+void create_level(char** tab,world_t *world);

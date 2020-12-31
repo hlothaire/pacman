@@ -14,6 +14,20 @@ typedef struct pacman {
 	int is_visible;
 } pacman_t;
 
+/*
+* Structure de fantome = composee de:
+* - un int qui represente une Postion X 
+* - un int qui represente une Postion Y
+* - un int qui represente sa couleur (1 = Bleu / 2 = Orange / 3 = Rouge / 4 = Rose)
+* 1 = deplacement facile / 4 = deplacement difficiles
+*/
+typedef struct fantome {
+	int PosX;
+	int PosY;
+	int Couleur;
+    int is_visible;
+} fantome_t;
+
 typedef struct sprite {
 	int x;
 	int y;
@@ -23,6 +37,7 @@ typedef struct sprite {
 
 typedef struct world{
 	pacman_t *joueur;
+    fantome_t *fantome1;
 	sprite_t **mur;
 	sprite_t **gomme;
 	int gameover;
@@ -33,6 +48,8 @@ typedef struct world{
 
 
 void init_pacman(pacman_t* pacman,int PosX, int PosY);
+
+void init_fantome(fantome_t* fantome, int PosX, int PosY);
 
 void init_sprite(sprite_t* sprite,int x,int y,int id);
 
@@ -58,4 +75,8 @@ int collision_wall(int x,int y,world_t *world);
 
 void collision_gomme(world_t *world);
 
+void collision_fantome1(world_t *world);
+
 void update_data(world_t *world);
+
+void move_fantome1(world_t *world);

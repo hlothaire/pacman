@@ -1,3 +1,8 @@
+/**
+ * \file main.c
+ * \author Lothaire Holcvart Alexandre Serratore
+ * \brief fichier main du jeu
+ */
 #include"graphic.h"
 
 #define SPRITE_SIZE 32;
@@ -23,9 +28,8 @@ int main( int argc, char* args[] )
     handle_events(&event,&world);
     update_data(&world);
     refresh_graphics(renderer,&world,&texture);
-
   }
-
+  printf("\n Partie Terminee. A bientot ! \n");
   desallouer_tab_2D(tab,16);
   SDL_DestroyRenderer(renderer);
   SDL_DestroyWindow(window);

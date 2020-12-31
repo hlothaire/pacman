@@ -1,7 +1,7 @@
 /*
 * Structure de fantome = composee de:
 * - un int qui represente une Postion X 
-* - un int qui represente une Postion XY
+* - un int qui represente une Postion Y
 * - un int qui represente sa couleur (1 = Bleu / 2 = Orange / 3 = Rouge / 4 = Rose)
 * 1 = deplacement facile / 4 = deplacement difficiles
 */

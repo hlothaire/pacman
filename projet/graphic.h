@@ -11,6 +11,7 @@
 
 typedef struct textures_s{
   SDL_Texture* joueur;
+  SDL_Texture* fantome;
   SDL_Texture* mur;
   SDL_Texture* gomme;
 } textures_t;
@@ -32,6 +33,8 @@ void init_textures(SDL_Renderer *renderer, textures_t *textures);
 void apply_sprite(SDL_Renderer *renderer, SDL_Texture *texture, sprite_t * sprite);
 
 void apply_player(SDL_Renderer *renderer,SDL_Texture *texture,pacman_t *pacman);
+
+void apply_fantome(SDL_Renderer *renderer,SDL_Texture *texture,fantome_t *fantome);
 
 /**
  * \brief La fonction vide le contenu graphique du renderer lié à l'écran de jeu

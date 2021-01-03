@@ -16,7 +16,10 @@ void clean_texture(SDL_Texture *texture)
 
 void clean_textures(textures_t *textures)
 {
-  clean_texture(textures->joueur);
+  clean_texture(textures->pacmanb);
+  clean_texture(textures->pacmanl);
+  clean_texture(textures->pacmanr);
+  clean_texture(textures->pacmanu);
   clean_texture(textures->fantome1);
   clean_texture(textures->fantome2);
   clean_texture(textures->fantome3);
@@ -27,7 +30,10 @@ void clean_textures(textures_t *textures)
 
 void  init_textures(SDL_Renderer *renderer, textures_t *textures)
 {
-  textures->joueur = load_imageJ("ressources/sprites/pacman.bmp",renderer);
+  textures->pacmanb = load_imageJ("ressources/sprites/pacmanb.bmp",renderer);
+  textures->pacmanl = load_imageJ("ressources/sprites/pacmanl.bmp",renderer);
+  textures->pacmanr = load_imageJ("ressources/sprites/pacmanr.bmp",renderer);
+  textures->pacmanu = load_imageJ("ressources/sprites/pacmanu.bmp",renderer);
   textures->fantome1 = load_imageJ("ressources/sprites/fantome1.bmp",renderer);
   textures->fantome2 = load_imageJ("ressources/sprites/fantome2.bmp",renderer);
   textures->fantome3 = load_imageJ("ressources/sprites/fantome3.bmp",renderer);
@@ -155,7 +161,22 @@ void refresh_graphics(SDL_Renderer *renderer, world_t *world,textures_t *texture
   apply_mur(renderer,textures->mur,world);
   apply_gomme(renderer,textures->gomme,world);
   if(world->joueur->is_visible == 0){
-      apply_player(renderer,textures->joueur,world->joueur);
+    switch(world->joueur->ori)
+    {
+      case 1:
+          apply_player(renderer,textures->pacmanu,world->joueur);
+          break;
+      case 2:
+          apply_player(renderer,textures->pacmanb,world->joueur);
+          break;
+      case 3:
+          apply_player(renderer,textures->pacmanl,world->joueur);
+          break;
+      case 4:
+          apply_player(renderer,textures->pacmanr,world->joueur);
+          break;
+    }
+
   }
   if(world->fantome1->is_visible == 0){
       apply_fantome(renderer,textures->fantome1,world->fantome1);

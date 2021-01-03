@@ -10,7 +10,10 @@
 #include "niveau.h"
 
 typedef struct textures_s{
-  SDL_Texture* joueur;
+  SDL_Texture* pacmanb;
+  SDL_Texture* pacmanl;
+  SDL_Texture* pacmanr;
+  SDL_Texture* pacmanu;
   SDL_Texture* fantome1;
   SDL_Texture* fantome2;
   SDL_Texture* fantome3;

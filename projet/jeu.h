@@ -12,17 +12,19 @@
 * \param PosY represente une Postion Y
 * \param NbVie represente le nombre de vie
 * \param is_visible represente son statue visible ou non
+* \param ori represente son orientation
 */
 typedef struct pacman {
 	int PosX;
 	int PosY;
 	int NbVie;
 	int is_visible;
+	int ori;
 } pacman_t;
 
 /**
 * \brief Structure de fantome = composee de:
-* \param PosX represente une Postion X 
+* \param PosX represente une Postion X
 * \param PosY represente une Postion Y
 * \param Difficulte represente sa Difficulte:
 * \param is_visible represente son statue visible ou non
@@ -32,12 +34,12 @@ typedef struct fantome {
 	int PosX;
 	int PosY;
 	int Difficulte;
-    int is_visible;
+  int is_visible;
 } fantome_t;
 
 /**
 * \brief Structure d un sprite = composee de:
-* \param PosX represente une Postion X 
+* \param PosX represente une Postion X
 * \param PosY represente une Postion Y
 * \param id represente son id
 * \param is_visible represente son statue visible ou non
@@ -66,10 +68,10 @@ typedef struct sprite {
 */
 typedef struct world{
 	pacman_t *joueur;
-    fantome_t *fantome1;
-    fantome_t *fantome2;
-    fantome_t *fantome3;
-    fantome_t *fantome4;
+  fantome_t *fantome1;
+  fantome_t *fantome2;
+  fantome_t *fantome3;
+  fantome_t *fantome4;
 	sprite_t **mur;
 	sprite_t **gomme;
 	int gameover;
@@ -156,7 +158,7 @@ void handle_events(SDL_Event *event,world_t *world);
  * Initialise les murs du monde aux coordonnes indiquees
  * \param world Monde a modifier
  * \param x Position X du mur
- * \param y Position Y du mur 
+ * \param y Position Y du mur
  * \param index ID du mur
  */
 void init_mur(world_t *world,int x,int y, int index);
@@ -165,7 +167,7 @@ void init_mur(world_t *world,int x,int y, int index);
 * \brief Fonction d'initialisation
  * Initialise les gommes du monde aux coordonnes indiquees
  * \param x Position X de la gomme
- * \param y Position Y de la gomme 
+ * \param y Position Y de la gomme
  * \param index ID de la gomme
  */
 void init_gomme(world_t *world,int x,int y, int index);
@@ -192,7 +194,7 @@ int collision_wall(int x,int y,world_t *world);
 /**
  * \brief Fonction de gestion: Gère les collisions avec les gommes
  * \param x Position X de la gomme
- * \param y Position Y de la gomme 
+ * \param y Position Y de la gomme
  * \param world Monde a modifier
  */
 void collision_gomme(world_t *world);

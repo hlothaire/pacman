@@ -29,6 +29,7 @@ void init_pacman(pacman_t* pacman,int PosX, int PosY)
     pacman->PosY = PosY;
     pacman->NbVie = 3;
     pacman->is_visible = 0;
+    pacman->ori = 4;
 }
 
 void init_fantome(fantome_t* fantome,int PosX, int PosY, int Difficulte)
@@ -50,7 +51,7 @@ void init_sprite(sprite_t* sprite,int x,int y,int id)
 void init_data(world_t* world)
 {
   world->gameover = 0;
-  world->joueur = malloc(4*sizeof(int));
+  world->joueur = malloc(5*sizeof(int));
   world->fantome1 = malloc(4*sizeof(int));
   world->fantome2 = malloc(4*sizeof(int));
   world->fantome3 = malloc(4*sizeof(int));
@@ -113,6 +114,7 @@ void handle_events(SDL_Event *event,world_t *world)
             if(collision_fantomes(world) == 0){
                 if(collision_wall(world->joueur->PosX, (world->joueur->PosY - SPRITE_SIZE),world) == 0){
                     world->joueur->PosY -= SPRITE_SIZE;
+                    world->joueur->ori = 1;
                     collision_fantomes(world);
                     break;
                 }
@@ -124,6 +126,7 @@ void handle_events(SDL_Event *event,world_t *world)
             if(collision_fantomes(world) == 0){
                 if(collision_wall(world->joueur->PosX, (world->joueur->PosY + SPRITE_SIZE),world) == 0){
                     world->joueur->PosY += SPRITE_SIZE;
+                    world->joueur->ori = 2;
                     collision_fantomes(world);
                     break;
                 }
@@ -135,18 +138,20 @@ void handle_events(SDL_Event *event,world_t *world)
             if(collision_fantomes(world) == 0){
                 if(collision_wall(world->joueur->PosX - SPRITE_SIZE,world->joueur->PosY,world) == 0){
                     world->joueur->PosX -= SPRITE_SIZE;
+                    world->joueur->ori = 3;
                     collision_fantomes(world);
                     break;
                 }
             }
             collision_fantomes(world);
             break;
-            
+
         case SDLK_d:
             move_fantomes(world);
             if(collision_fantomes(world) == 0){
                 if(collision_wall(world->joueur->PosX + SPRITE_SIZE,world->joueur->PosY,world) == 0){
                     world->joueur->PosX += SPRITE_SIZE;
+                    world->joueur->ori = 4;
                     collision_fantomes(world);
                     break;
                 }
@@ -202,19 +207,19 @@ int collision_fantome(world_t *world, fantome_t *fantome)
     if(world->joueur->PosX == fantome->PosX && world->joueur->PosY == fantome->PosY){
         world->joueur->PosX = XdepartJ;
         world->joueur->PosY = YdepartJ;
-        
+
         world->fantome1->PosX = XdepartF1;
         world->fantome1->PosY = YdepartF1;
-        
+
         world->fantome2->PosX = XdepartF2;
         world->fantome2->PosY = YdepartF2;
-        
+
         world->fantome3->PosX = XdepartF3;
         world->fantome3->PosY = YdepartF3;
-        
+
         world->fantome4->PosX = XdepartF4;
         world->fantome4->PosY = YdepartF4;
-        
+
         world->joueur->NbVie += -1;
         world->score += -5;
         if(world->joueur->NbVie <= 0){
@@ -264,7 +269,7 @@ void move_fantome(world_t *world, fantome_t *fantome)
     //difference de position
     int DX = abs(PosXF - PosXJ);
     int DY = abs(PosYF - PosYJ);
-    
+
     int direction;
     switch(fantome->Difficulte)
     {
@@ -335,7 +340,7 @@ void move_fantome(world_t *world, fantome_t *fantome)
                             fantome->PosY += SPRITE_SIZE;
                         }
                     }
-                        
+
             }else{
                 if(collision_wall((PosXF - SPRITE_SIZE), PosYF,world) == 0){
                         fantome->PosX -= SPRITE_SIZE;
@@ -348,7 +353,7 @@ void move_fantome(world_t *world, fantome_t *fantome)
                     }
             }
             break;
-            
+
         default:
             direction = rand() % 4 + 1;
             switch(direction){
@@ -405,4 +410,3 @@ void move_fantome(world_t *world, fantome_t *fantome)
 
     }
 }
-

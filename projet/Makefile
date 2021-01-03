@@ -3,13 +3,13 @@ CFLAGS=-Wall
 LIBS = -L./SDL2_ttf/.libs -L./SDL2_image/.libs
 LDFLAGS= `sdl2-config --cflags --libs` -lm
 INCLUDES= -I./SDL2_ttf -I./SDL2_image
-EXEC=main
+EXEC=PacMan
 SRC= main.c graphic.c niveau.c jeu.c
 OBJ= $(SRC:.c=.o)
 
 all: $(EXEC)
 
-main: $(OBJ)
+PacMan: $(OBJ)
 	$(CC) $(CFLAGS) $(INCLUDES) -o $@ $^ $(LIBS) $(LDFLAGS)
 
 %.o: %.c

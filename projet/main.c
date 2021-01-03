@@ -29,7 +29,7 @@ int main( int argc, char* args[] )
     update_data(&world);
     refresh_graphics(renderer,&world,&texture);
   }
-  printf("\n Partie Terminee. A bientot ! \n");
+  printf("\n Partie Terminee.\n Votre score: %d. \n A bientot ! \n", world.score);
   desallouer_tab_2D(tab,16);
   SDL_DestroyRenderer(renderer);
   SDL_DestroyWindow(window);

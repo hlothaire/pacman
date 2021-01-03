@@ -11,7 +11,10 @@
 
 typedef struct textures_s{
   SDL_Texture* joueur;
-  SDL_Texture* fantome;
+  SDL_Texture* fantome1;
+  SDL_Texture* fantome2;
+  SDL_Texture* fantome3;
+  SDL_Texture* fantome4;
   SDL_Texture* mur;
   SDL_Texture* gomme;
 } textures_t;

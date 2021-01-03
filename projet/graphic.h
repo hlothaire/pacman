@@ -38,8 +38,15 @@ void clean_texture(SDL_Texture *texture);
 
 void clean_textures(textures_t *textures);
 
+/**
+ * \brief La fonction initialise une texture
+ * \param texture la texture à initialiser
+*/
 void init_textures(SDL_Renderer *renderer, textures_t *textures);
 
+/**
+ * \brief La fonction applique un sprite
+*/
 void apply_sprite(SDL_Renderer *renderer, SDL_Texture *texture, sprite_t * sprite);
 
 void apply_player(SDL_Renderer *renderer,SDL_Texture *texture,pacman_t *pacman);

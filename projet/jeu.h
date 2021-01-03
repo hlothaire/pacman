@@ -183,7 +183,7 @@ void init_gomme(world_t *world,int x,int y, int index);
 
 /**
 * \brief Fonction d'initialisation
- * Initialise les gommes du monde aux coordonnes indiquees
+ * Initialise les super gommes du monde aux coordonnes indiquees
  * \param x Position X de la gomme
  * \param y Position Y de la gomme
  * \param index ID de la gomme

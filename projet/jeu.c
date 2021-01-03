@@ -259,7 +259,7 @@ int collision_fantome(world_t *world, fantome_t *fantome)
         world->fantome4->PosY = YdepartF4;
 
         world->joueur->NbVie += -1;
-        world->score += -5;
+        world->score += -150;
         if(world->joueur->NbVie <= 0){
             world->gameover = 1;
         }

@@ -2,6 +2,7 @@
 Programmation avancée. 
 Auteurs: Lothaire Holcvart, Alexandre Serratore 
 Instructions de compilation: 
+- Installer SDL2 et SDL2_TTF
 - Decompresser l'archive dans un dossier.
 - Se placer dans ce dossier a l'aide du terminal
 - Utiliser la commande "make"

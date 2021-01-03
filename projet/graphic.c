@@ -26,6 +26,9 @@ void clean_textures(textures_t *textures)
   clean_texture(textures->fantome4);
   clean_texture(textures->gomme);
   clean_texture(textures->mur);
+  clean_texture(textures->supgomme);
+  clean_font(textures->font);
+  clean_texture(textures->vie);
 }
 
 void  init_textures(SDL_Renderer *renderer, textures_t *textures)
@@ -40,6 +43,9 @@ void  init_textures(SDL_Renderer *renderer, textures_t *textures)
   textures->fantome4 = load_imageJ("ressources/sprites/fantome4.bmp",renderer);
   textures->mur = load_image("ressources/sprites/bloc.bmp",renderer);
   textures->gomme = load_image("ressources/sprites/gomme.bmp",renderer);
+  textures->supgomme = load_image("ressources/sprites/supGom.bmp",renderer);
+  textures->font = load_font("ressources/arial.ttf",14);
+  textures->vie = load_image("ressources/sprites/vie.bmp",renderer);
 }
 
 void apply_sprite(SDL_Renderer *renderer, SDL_Texture *texture, sprite_t * sprite)
@@ -80,7 +86,6 @@ SDL_Texture *load_image(const char path[], SDL_Renderer *renderer){
       fprintf(stderr, "Erreur pendant chargement image BMP: %s", SDL_GetError());
       return NULL;
   }
-  //SDL_SetColorKey(tmp, SDL_TRUE, SDL_MapRGB(tmp->format, 255, 0, 255));
   texture = SDL_CreateTextureFromSurface(renderer, tmp);
   SDL_FreeSurface(tmp);
   if(NULL == texture)
@@ -155,11 +160,23 @@ void apply_gomme(SDL_Renderer *renderer, SDL_Texture *textures, world_t* world)
   }
 }
 
+void apply_supgomme(SDL_Renderer *renderer, SDL_Texture *textures, world_t* world)
+{
+  for(int i=0;i<world->nb_supgomme;i++){
+    if(world->supgomme[i]->is_visible ==0){
+      apply_texture(textures,renderer,world->supgomme[i]->y,world->supgomme[i]->x);
+    }
+  }
+}
+
 void refresh_graphics(SDL_Renderer *renderer, world_t *world,textures_t *textures)
 {
+  char  conv[20] = "";
+  sprintf(conv, "score = %d", world->score);
   clear_renderer(renderer);
   apply_mur(renderer,textures->mur,world);
   apply_gomme(renderer,textures->gomme,world);
+  apply_supgomme(renderer,textures->supgomme,world);
   if(world->joueur->is_visible == 0){
     switch(world->joueur->ori)
     {
@@ -190,5 +207,53 @@ void refresh_graphics(SDL_Renderer *renderer, world_t *world,textures_t *texture
   if(world->fantome4->is_visible == 0){
       apply_fantome(renderer,textures->fantome4,world->fantome4);
   }
+  if(world->gameover == 0){
+    apply_text(renderer,10,520,80,30,conv,textures->font);
+  }
+  if(world->gameover == 1){
+    apply_text(renderer,100,260,160,70,conv,textures->font);
+  }
+  print_life(renderer,textures->vie,world);
   SDL_RenderPresent(renderer);
+}
+
+void init_ttf()
+{
+  if(TTF_Init()==-1) {
+    printf("TTF_Init: %s\n", TTF_GetError());
+  }
+}
+
+TTF_Font * load_font(const char *path, int font_size)
+{
+  TTF_Font *font = TTF_OpenFont(path, font_size);
+  if(font == NULL){
+    fprintf(stderr, "Erreur pendant chargement font: %s\n", SDL_GetError());
+  }
+  return font;
+}
+
+void apply_text(SDL_Renderer *renderer,int x, int y, int w, int h, const char *text, TTF_Font *font)
+{
+  SDL_Color color = { 255, 255, 255 };
+  SDL_Surface* surface = TTF_RenderText_Solid(font, text, color);
+  SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
+  SDL_Rect dstrect2 = {x, y, w, h};
+  SDL_RenderCopy(renderer, texture, NULL, &dstrect2);
+
+}
+
+void clean_font(TTF_Font * font)
+{
+  TTF_CloseFont(font);
+}
+
+void print_life(SDL_Renderer *renderer,SDL_Texture *textures, world_t* world)
+{
+  int x = 200;
+  int y = 530;
+  for(int i = 0; i<world->joueur->NbVie;i++){
+    apply_texture(textures,renderer,x,y);
+    x += 15;
+  }
 }

@@ -60,9 +60,13 @@ void init_data(world_t* world)
   for(int j =0; j<world->nb_mur; j++){
       world->mur[j] = malloc(4*sizeof(int));
   }
-  world->gomme = (sprite_t**)malloc(world->nb_mur*sizeof(sprite_t*));
+  world->gomme = (sprite_t**)malloc(world->nb_gomme*sizeof(sprite_t*));
   for(int i =0; i<world->nb_gomme; i++){
       world->gomme[i] = malloc(4*sizeof(int));
+  }
+  world->supgomme = (sprite_t**)malloc(world->nb_supgomme*sizeof(sprite_t*));
+  for(int l = 0; l<world->nb_supgomme; l++){
+    world->supgomme[l] = malloc(4*sizeof(int));
   }
   init_pacman(world->joueur,XdepartJ,YdepartJ);
   init_fantome(world->fantome1,XdepartF1,YdepartF1,1);
@@ -80,6 +84,7 @@ void clean_data(world_t* world)
   free(world->fantome4);
   free(world->mur);
   free(world->gomme);
+  free(world->supgomme);
 }
 
 void set_visible(sprite_t* sprite)
@@ -90,6 +95,24 @@ void set_visible(sprite_t* sprite)
 void set_invisible(sprite_t* sprite)
 {
     sprite->is_visible = 1;
+}
+
+void set_all_invisible(world_t* world)
+{
+  for(int i=0; i<world->nb_gomme; i++){
+    set_invisible(world->gomme[i]);
+  }
+  for(int j=0; j<world->nb_mur; j++){
+    set_invisible(world->mur[j]);
+  }
+  for(int l=0; l<world->nb_supgomme; l++){
+    set_invisible(world->supgomme[l]);
+  }
+  world->joueur->is_visible = 1;
+  world->fantome1->is_visible = 1;
+  world->fantome2->is_visible = 1;
+  world->fantome3->is_visible = 1;
+  world->fantome4->is_visible = 1;
 }
 
 int is_game_over(world_t *world)
@@ -173,6 +196,11 @@ void init_gomme(world_t *world,int x,int y,int index)
     init_sprite(world->gomme[index],x,y,1);
   }
 
+void init_supgomme(world_t *world,int x,int y,int index)
+  {
+    init_sprite(world->supgomme[index],x,y,1);
+  }
+
 int collision(int x, int y,sprite_t *sprite)
 {
   int d;
@@ -197,7 +225,17 @@ void collision_gomme(world_t *world)
   for(int i=0;i<world->nb_gomme;i++){
     if((collision(world->joueur->PosX,world->joueur->PosY,world->gomme[i]) == 1) && world->gomme[i]->is_visible == 0){
       set_invisible(world->gomme[i]);
-      world->score += 1;
+      world->score += 150;
+    }
+  }
+}
+
+void collision_supgomme(world_t *world)
+{
+  for(int i=0;i<world->nb_supgomme;i++){
+    if((collision(world->joueur->PosX,world->joueur->PosY,world->supgomme[i]) == 1) && world->supgomme[i]->is_visible == 0){
+      set_invisible(world->supgomme[i]);
+      world->score += 3000;
     }
   }
 }
@@ -250,6 +288,7 @@ int collision_fantomes(world_t *world)
 void update_data(world_t *world)
 {
   collision_gomme(world);
+  collision_supgomme(world);
 }
 
 void move_fantomes(world_t *world)

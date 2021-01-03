@@ -52,6 +52,7 @@ char** lire_fichier(const char* nomFichier){
 void nb_element(char** tab,world_t *world)
 {
   world->nb_gomme = 0;
+  world->nb_supgomme = 0;
   world->nb_mur = 0;
   for(int i =0;i<16;i++){
     for(int j= 0;j<16;j++){
@@ -62,7 +63,7 @@ void nb_element(char** tab,world_t *world)
         world->nb_mur ++;
       }
       if(tab[i][j] == '3'){
-        world->nb_gomme ++;
+        world->nb_supgomme ++;
       }
     }
   }
@@ -72,6 +73,7 @@ void create_level(char** tab,world_t *world)
 {
   int gomme = 0;
   int mur = 0;
+  int supgomme = 0;
   for(int i = 0;i<16;i++){
     for(int j = 0;j<16;j++){
       int x = i*32;
@@ -87,8 +89,8 @@ void create_level(char** tab,world_t *world)
             mur ++;
             break;
         case '3':
-            init_gomme(world,x,y,gomme);
-            gomme ++;
+            init_supgomme(world,x,y,supgomme);
+            supgomme ++;
             break;
       }
     }

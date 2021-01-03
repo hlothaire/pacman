@@ -16,7 +16,8 @@ int main( int argc, char* args[] )
   SDL_Event event;
   SDL_Window *window = NULL;
 
-  if(init_sdl(&window,&renderer,512,512) == -1){
+  init_ttf();
+  if(init_sdl(&window,&renderer,512,576) == -1){
     return EXIT_FAILURE;
   }
   tab = lire_fichier("ressources/niveau/niveau.txt");
@@ -29,7 +30,12 @@ int main( int argc, char* args[] )
     update_data(&world);
     refresh_graphics(renderer,&world,&texture);
   }
-  printf("\n Partie Terminee.\n Votre score: %d. \n A bientot ! \n", world.score);
+  if(is_game_over(&world)){
+    set_all_invisible(&world);
+    refresh_graphics(renderer,&world,&texture);
+
+    SDL_Delay(1100);
+  }
   desallouer_tab_2D(tab,16);
   SDL_DestroyRenderer(renderer);
   SDL_DestroyWindow(window);

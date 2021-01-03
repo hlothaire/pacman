@@ -1,7 +1,7 @@
 C=gcc
 CFLAGS=-Wall
 LIBS = -L./SDL2_ttf/.libs -L./SDL2_image/.libs
-LDFLAGS= `sdl2-config --cflags --libs` -lm
+LDFLAGS= `sdl2-config --cflags --libs` -lSDL2_ttf -lm
 INCLUDES= -I./SDL2_ttf -I./SDL2_image
 EXEC=PacMan
 SRC= main.c graphic.c niveau.c jeu.c

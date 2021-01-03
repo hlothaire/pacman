@@ -74,9 +74,11 @@ typedef struct world{
   fantome_t *fantome4;
 	sprite_t **mur;
 	sprite_t **gomme;
+	sprite_t **supgomme;
 	int gameover;
 	int score;
 	int nb_mur;
+	int nb_supgomme;
 	int nb_gomme;
 } world_t;
 
@@ -139,6 +141,13 @@ void set_invisible(sprite_t* sprite);
 
 /**
 * \brief Fonction de gestion
+ * Modifie la visibilite de tout les sprites
+ * \param sprite Sprite a modifier
+ */
+void set_all_invisible(world_t* world);
+
+/**
+* \brief Fonction de gestion
  * Gère le game over
  * \param world Monde a modifier
  * \return 0 si la partie n est pas terminee, 1 sinon
@@ -173,6 +182,15 @@ void init_mur(world_t *world,int x,int y, int index);
 void init_gomme(world_t *world,int x,int y, int index);
 
 /**
+* \brief Fonction d'initialisation
+ * Initialise les gommes du monde aux coordonnes indiquees
+ * \param x Position X de la gomme
+ * \param y Position Y de la gomme
+ * \param index ID de la gomme
+ */
+void init_supgomme(world_t *world,int x,int y, int index);
+
+/**
 * \brief Fonction de gestion
  * Gère les collisions avec les sprites
  * \param x Position X du sprite
@@ -198,6 +216,12 @@ int collision_wall(int x,int y,world_t *world);
  * \param world Monde a modifier
  */
 void collision_gomme(world_t *world);
+
+/**
+ * \brief Fonction de gestion: Gère les collisions avec les supgommes
+ * \param world Monde a modifier
+ */
+void collision_supgomme(world_t *world);
 
 /**
 * \brief Fonction de gestion

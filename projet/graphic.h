@@ -5,6 +5,7 @@
  */
 
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_ttf.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include "niveau.h"
@@ -20,6 +21,9 @@ typedef struct textures_s{
   SDL_Texture* fantome4;
   SDL_Texture* mur;
   SDL_Texture* gomme;
+  SDL_Texture* supgomme;
+  SDL_Texture* vie;
+  TTF_Font * font;
 } textures_t;
 
 
@@ -98,10 +102,52 @@ void clean_sdl(SDL_Renderer *renderer,SDL_Window *window);
 
 int init_sdl(SDL_Window **window, SDL_Renderer **renderer, int width, int height);
 
+/**
+ * \brief La fonction charge une image  et renvoie la texture correspondante
+ * \param path est le chemin du fichier image.
+ * \param renderer le renderer
+ * \return la surface SDL contenant l'image.
+ * renvoie NULL si le chargement a échoué
+*/
+
 SDL_Texture *load_imageJ(const char path[], SDL_Renderer *renderer);
 
 void apply_mur(SDL_Renderer *renderer, SDL_Texture *textures, world_t* world);
 
 void apply_gomme(SDL_Renderer *renderer, SDL_Texture *textures, world_t* world);
 
+void apply_supgomme(SDL_Renderer *renderer, SDL_Texture *textures, world_t* world);
+
 void refresh_graphics(SDL_Renderer *renderer, world_t *world,textures_t *textures);
+
+/**
+ * \brief La fonction initialise l'environnement TTF
+*/
+
+void init_ttf();
+
+/**
+ * \brief La fonction charge une police
+ * \param path le chemin du fichier correpondant à la police
+ * \param font_size la taille de la police
+ * \return la police chargée
+*/
+
+TTF_Font * load_font(const char* path, int font_size);
+
+/**
+ * \brief La fonction applique un texte dans une certaine police sur le renderer à une certaine position et avec une certaine dimension
+ * \param renderer le renderer
+ * \param x abscisse du coin en haut à gauche du texte
+ * \param y son abscisse
+ * \param w la largeur du message
+ * \param h sa hauteur
+ * \param text le texte à afficher
+ * \param font la police
+*/
+
+void apply_text(SDL_Renderer *renderer,int x, int y, int w, int h, const char *text, TTF_Font *font);
+
+void clean_font(TTF_Font * font);
+
+void print_life(SDL_Renderer *renderer,SDL_Texture *textures, world_t* world);

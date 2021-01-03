@@ -10,9 +10,9 @@ Instructions de lancement:
 - Utiliser la commande: "./PacMan" pour lancer le jeu.
 
 Manuel du jeu:
-Déplacement en 2D à l'aide des touches Z,Q,S,D.
-Déplacement impossible contre les briques bleues, qui représentent les murs du niveau.
-Ramasser des pac gommes (petits points jaune) confère des points.
-Se faire toucher par un des quatres fantomes fait perdre des points et repositionne tout les personnage a leur position de départ, tout en faisant perdre une vie au joueur.
-Au bout de 3 vie perdue, c'est Game Over. 
-Appuyez sur "Echap" pour mettre un terme a la partie en cours.
+- Déplacement en 2D à l'aide des touches Z,Q,S,D.
+- Déplacement impossible contre les briques bleues, qui représentent les murs du niveau.
+- Ramasser des pac gommes (petits points jaune) confère des points.
+- Se faire toucher par un des quatres fantomes fait perdre des points et repositionne tout les personnage a leur position de départ, tout en faisant perdre une vie au joueur.
+- Au bout de 3 vie perdue, c'est Game Over. 
+- Appuyez sur "Echap" pour mettre un terme a la partie en cours.
